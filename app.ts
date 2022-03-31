@@ -45,6 +45,9 @@ class Board {
   red_bombs = []
   blue_bombs = []
 
+  red_messages = []
+  blue_messages = []
+
   render(
     // 'red' and 'blue' information is all stored in the same Board, but
     // 'render' should only send down information that that player has the
@@ -59,19 +62,31 @@ type Color = 'red' | 'blue';
 
 
 app.get('/init', (req, res) => {
+  // return new session id, board state; maybe update other player?
+  
   const board_id = req.query.board_id; // null => create new board
   const color = req.query.color; // null => assign automatically
 });
 
 app.get('/place', (req, res) => {
+  // return board state, update other player
+  
+  const session_id = req.query.session_id;
+  const placements = []; // TODO
 });
 
 app.get('/bomb', (req, res) => {
+  // return board state, update other player
+  
+  const session_id = req.query.session_id;
+  const location = null; // TODO
 });
 
 // This thing is going to immediately return a promise that will get fulfilled
 // later by something else. 
 app.get('/poll', (req, res): Promise<any> => {
+  // return board state
+  
   const session_id = req.query.session_id;
 
   let session = lookup(session_id);
